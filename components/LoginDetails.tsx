@@ -2,6 +2,7 @@ import { View } from 'react-native'
 import React from 'react'
 import CustomText from './CustomText'
 import CustomTextInput from './CustomTextInput'
+import { Feather } from '@expo/vector-icons';
 
 const LoginDetails = () => {
   return (
@@ -11,6 +12,13 @@ const LoginDetails = () => {
         <View className="w-full mt-8">
             <CustomTextInput placeholder='Full Name' iconName='user'/>
             <CustomTextInput placeholder='••••••••' iconName='lock' isPassword={true}/>
+        </View>
+        <View className="flex-row justify-between w-full mt-2">
+            <View className="flex-row items-center">
+                <Feather name="check-circle" size={20} color="#82A387" />
+                <CustomText variant='small' dark={false}>Remember Me</CustomText>
+            </View>
+            <CustomText variant='small' dark={false}>Forgot Password?</CustomText>
         </View>
     </View>
   )
