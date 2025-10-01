@@ -1,35 +1,36 @@
-import React from 'react';
-import { Text } from 'react-native';
-interface CustomTextProps{
-    variant:"small"|"medium"|"large"; //tamaño del texto
-    dark:boolean;// Color claro u oscuro
-    children: React.ReactNode;//Va dentro de la etiqueta
+import { Text } from 'react-native'
+import React from 'react'
+
+interface CustomTextProps {
+    children: React.ReactNode;
+    variant: 'large' | 'small';
+    dark: boolean;
+    color?: string;
 }
 
-const CustomText = ({variant, dark, children}:CustomTextProps) => {
+const CustomText = ({ children, variant, dark, color }: CustomTextProps) => {
+
+    const getFontSize = () => {
+        switch (variant) {
+            case 'large':
+                return 'text-4xl';
+            case 'small':
+                return 'text-base';
+            default:
+                return 'text-base';
+        }
+    }
+
+    const getTextColor = () => {
+        if (color) return color;
+        return dark ? 'text-black' : 'text-white';
+    }
+
   return (
-     <Text className={styleSelector(variant,dark)}>
-        {children}
+    <Text className={`${getFontSize()} ${getTextColor()}`}>
+      {children}
     </Text>
- )
-}
-
-function styleSelector(variant:any,dark:boolean){
-    let style = ""
-    if(dark == true){
-        style += "text-[#72907A] "        
-    }else{
-        style += "text-white "
-    }
-    
-    switch(variant){
-        case "small":
-            return style + "font-semibold text-sm" ;
-        case "medium":
-            return style + "font-semibold text-base" ;
-        case "large":
-            return style + " font-semibold text-xl" ;
-    }
+  )
 }
 
 export default CustomText
