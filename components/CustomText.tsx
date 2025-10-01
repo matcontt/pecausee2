@@ -4,11 +4,10 @@ import React from 'react'
 interface CustomTextProps {
     children: React.ReactNode;
     variant: 'large' | 'small';
-    dark: boolean;
-    color?: string;
+    className?: string;
 }
 
-const CustomText = ({ children, variant, dark, color }: CustomTextProps) => {
+const CustomText = ({ children, variant, className }: CustomTextProps) => {
 
     const getFontSize = () => {
         switch (variant) {
@@ -21,13 +20,8 @@ const CustomText = ({ children, variant, dark, color }: CustomTextProps) => {
         }
     }
 
-    const getTextColor = () => {
-        if (color) return color;
-        return dark ? 'text-black' : 'text-white';
-    }
-
   return (
-    <Text className={`${getFontSize()} ${getTextColor()}`}>
+    <Text className={`${getFontSize()} ${className}`}>
       {children}
     </Text>
   )
