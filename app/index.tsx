@@ -8,6 +8,19 @@ export default function Index() {
   const [password, setPassword] = useState("");
   const [rememberMe, setRememberMe] = useState(false);
 
+  const handleLogin = () => {
+    console.log("Login button pressed");
+    console.log({ fullName, password, rememberMe });
+  };
+
+  const handleForgotPassword = () => {
+    console.log("Forgot Password pressed");
+  };
+
+  const handleSignUp = () => {
+    console.log("Sign Up pressed");
+  };
+
   return (
     <ImageBackground
       source={require("../assets/images/pexels-photo-3571551.jpeg")}
@@ -20,6 +33,9 @@ export default function Index() {
         setPassword={setPassword}
         rememberMe={rememberMe}
         setRememberMe={setRememberMe}
+        onLoginPress={handleLogin}
+        onForgotPress={handleForgotPassword}
+        onSignUpPress={handleSignUp}
       />
     </ImageBackground>
   );
