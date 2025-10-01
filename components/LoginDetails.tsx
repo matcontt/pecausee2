@@ -3,6 +3,7 @@ import React from 'react'
 import CustomText from './CustomText'
 import CustomTextInput from './CustomTextInput'
 import { Feather } from '@expo/vector-icons';
+import CustomButton from './CustomButton';
 
 const LoginDetails = () => {
   return (
@@ -20,6 +21,7 @@ const LoginDetails = () => {
             </View>
             <CustomText variant='small' dark={false}>Forgot Password?</CustomText>
         </View>
+        <CustomButton label='Login' />
     </View>
   )
 }
