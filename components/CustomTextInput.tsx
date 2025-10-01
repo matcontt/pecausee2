@@ -6,9 +6,11 @@ interface CustomTextInputProps {
   placeholder: string;
   iconName: React.ComponentProps<typeof Feather>['name'];
   isPassword?: boolean;
+  value: string;
+  onChangeText: (text: string) => void;
 }
 
-const CustomTextInput = ({ placeholder, iconName, isPassword = false }: CustomTextInputProps) => {
+const CustomTextInput = ({ placeholder, iconName, isPassword = false, value, onChangeText }: CustomTextInputProps) => {
   return (
     <View className="flex-row items-center bg-[#F0F4F3] rounded-xl p-4 my-3 w-full">
       <Feather name={iconName} size={20} color="#82A387" />
@@ -17,6 +19,8 @@ const CustomTextInput = ({ placeholder, iconName, isPassword = false }: CustomTe
         className="ml-3 flex-1 text-[#82A387]"
         secureTextEntry={isPassword}
         placeholderTextColor="#82A387"
+        value={value}
+        onChangeText={onChangeText}
       />
       {isPassword && (
         <Feather name="eye" size={20} color="#82A387" />
