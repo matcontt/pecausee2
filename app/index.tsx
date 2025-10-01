@@ -1,12 +1,16 @@
 import CustomText from "@/components/CustomText";
 import "@/global.css";
-import { View } from "react-native";
+import { ImageBackground, View } from "react-native";
+
 export default function Index() {
   return (
-    <View className="bg-[#355D49] w-screen h-screen">
-     <CustomText variant="large" dark={false}>
+    <ImageBackground
+      source={require("../assets/images/pexels-photo-3571551.jpeg")}
+      className="flex-1 w-screen h-screen justify-center items-center"
+    >
+      <CustomText variant="large" dark={true}>
         Hello World
       </CustomText>
-    </View>
+    </ImageBackground>
   );
 }
