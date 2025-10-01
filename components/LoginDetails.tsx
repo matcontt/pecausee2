@@ -1,4 +1,4 @@
-import { View, Text, TouchableOpacity } from 'react-native'
+import { View, TouchableOpacity } from 'react-native'
 import React from 'react'
 import CustomText from './CustomText'
 import CustomTextInput from './CustomTextInput'
@@ -30,8 +30,8 @@ const LoginDetails = ({
 }: LoginDetailsProps) => {
   return (
     <View className="bg-white absolute bottom-0 h-[75%] w-full rounded-tl-[60px] p-8 items-center">
-        <CustomText variant='large' dark={false}>Welcom Back</CustomText>
-        <CustomText variant='small' dark={false}>Login to your account</CustomText>
+        <CustomText variant='large' dark={true}>Welcom Back</CustomText>
+        <CustomText variant='small' dark={true}>Login to your account</CustomText>
         <View className="w-full mt-8">
             <CustomTextInput placeholder='Full Name' iconName='user' value={fullName} onChangeText={setFullName}/>
             <CustomTextInput placeholder='••••••••' iconName='lock' isPassword={true} value={password} onChangeText={setPassword}/>
@@ -39,17 +39,17 @@ const LoginDetails = ({
         <View className="flex-row justify-between w-full mt-2">
             <TouchableOpacity onPress={() => setRememberMe(!rememberMe)} className="flex-row items-center">
                 <Feather name={rememberMe ? "check-circle" : "circle"} size={20} color="#82A387" />
-                <CustomText variant='small' dark={false}>Remember Me</CustomText>
+                <CustomText variant='small' dark={true}>Remember Me</CustomText>
             </TouchableOpacity>
             <TouchableOpacity onPress={onForgotPress}>
-                <CustomText variant='small' dark={false}>Forgot Password?</CustomText>
+                <CustomText variant='small' dark={true}>Forgot Password?</CustomText>
             </TouchableOpacity>
         </View>
         <CustomButton label='Login' onPress={onLoginPress}/>
         <View className="flex-row items-center mt-4">
-            <Text className="text-gray-500">Don't have account? </Text>
+            <CustomText variant='small' dark={true} color='text-gray-500'>Don't have account? </CustomText>
             <TouchableOpacity onPress={onSignUpPress}>
-                <Text className="text-[#355D49] font-bold">Sign up</Text>
+                <CustomText variant='small' dark={true} color='text-[#355D49] font-bold'>Sign up</CustomText>
             </TouchableOpacity>
         </View>
     </View>
