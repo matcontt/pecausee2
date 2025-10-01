@@ -12,9 +12,22 @@ interface LoginDetailsProps {
     setPassword: (text: string) => void;
     rememberMe: boolean;
     setRememberMe: (value: boolean) => void;
+    onLoginPress: () => void;
+    onForgotPress: () => void;
+    onSignUpPress: () => void;
 }
 
-const LoginDetails = ({ fullName, setFullName, password, setPassword, rememberMe, setRememberMe }: LoginDetailsProps) => {
+const LoginDetails = ({ 
+    fullName, 
+    setFullName, 
+    password, 
+    setPassword, 
+    rememberMe, 
+    setRememberMe, 
+    onLoginPress, 
+    onForgotPress, 
+    onSignUpPress 
+}: LoginDetailsProps) => {
   return (
     <View className="bg-white absolute bottom-0 h-[75%] w-full rounded-tl-[60px] p-8 items-center">
         <CustomText variant='large' dark={false}>Welcom Back</CustomText>
@@ -28,12 +41,16 @@ const LoginDetails = ({ fullName, setFullName, password, setPassword, rememberMe
                 <Feather name={rememberMe ? "check-circle" : "circle"} size={20} color="#82A387" />
                 <CustomText variant='small' dark={false}>Remember Me</CustomText>
             </TouchableOpacity>
-            <CustomText variant='small' dark={false}>Forgot Password?</CustomText>
+            <TouchableOpacity onPress={onForgotPress}>
+                <CustomText variant='small' dark={false}>Forgot Password?</CustomText>
+            </TouchableOpacity>
         </View>
-        <CustomButton label='Login' />
+        <CustomButton label='Login' onPress={onLoginPress}/>
         <View className="flex-row items-center mt-4">
             <Text className="text-gray-500">Don't have account? </Text>
-            <Text className="text-[#355D49] font-bold">Sign up</Text>
+            <TouchableOpacity onPress={onSignUpPress}>
+                <Text className="text-[#355D49] font-bold">Sign up</Text>
+            </TouchableOpacity>
         </View>
     </View>
   )

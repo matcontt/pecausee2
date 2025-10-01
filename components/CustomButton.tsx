@@ -3,11 +3,12 @@ import React from 'react'
 
 interface CustomButtonProps {
     label: string;
+    onPress: () => void;
 }
 
-const CustomButton = ({ label }: CustomButtonProps) => {
+const CustomButton = ({ label, onPress }: CustomButtonProps) => {
   return (
-    <TouchableOpacity className="bg-[#355D49] rounded-full p-4 w-full items-center mt-8">
+    <TouchableOpacity onPress={onPress} className="bg-[#355D49] rounded-full p-4 w-full items-center mt-8">
       <Text className="text-white text-lg">{label}</Text>
     </TouchableOpacity>
   )
