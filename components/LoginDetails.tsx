@@ -1,4 +1,4 @@
-import { View } from 'react-native'
+import { View, Text } from 'react-native'
 import React from 'react'
 import CustomText from './CustomText'
 import CustomTextInput from './CustomTextInput'
@@ -22,6 +22,10 @@ const LoginDetails = () => {
             <CustomText variant='small' dark={false}>Forgot Password?</CustomText>
         </View>
         <CustomButton label='Login' />
+        <View className="flex-row items-center mt-4">
+            <Text className="text-gray-500">Don't have account? </Text>
+            <Text className="text-[#355D49] font-bold">Sign up</Text>
+        </View>
     </View>
   )
 }
