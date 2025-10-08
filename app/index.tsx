@@ -67,7 +67,7 @@ export default function Index() {
         onSignUpPress={() => handleActionType("SignUp")}
       />
       <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Link href={'/SettingsScreen'}> Settings</Link>
+      <Link href="/(home)">Settings</Link>
     </View>
     </ImageBackground>
   );
