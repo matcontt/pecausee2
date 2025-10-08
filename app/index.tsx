@@ -1,7 +1,7 @@
 import "@/global.css";
-import { Link, useNavigation } from 'expo-router';
+import { Link, router, useNavigation } from 'expo-router';
 import { useEffect, useState } from "react";
-import { Alert, ImageBackground, Text, View } from "react-native";
+import { Alert, ImageBackground, TouchableOpacity, View, Text } from "react-native";
 import LoginDetails from "../components/LoginDetails";
 export default function Index() {
   const [fullName, setFullName] = useState("");
@@ -66,9 +66,15 @@ export default function Index() {
         onForgotPress={handleForgotPassword}
         onSignUpPress={() => handleActionType("SignUp")}
       />
-      <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Link href="/(home)">Settings</Link>
-    </View>
+      <View className="absolute bottom-12 right-6">
+      <TouchableOpacity 
+        onPress={() => { 
+          router.push("/(home)/HomeScreen")
+        }}
+        className="bg-[#355D49] rounded-full p-4 w-full items-center mt-8"
+      ><Text className="text-white text-lg">Enviar</Text></TouchableOpacity>
+      </View>
+      
     </ImageBackground>
   );
 
