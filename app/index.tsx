@@ -1,56 +1,58 @@
 import "@/global.css";
-import { Link, router, useNavigation } from 'expo-router';
+import { router, useNavigation } from "expo-router";
 import { useEffect, useState } from "react";
-import { Alert, ImageBackground, TouchableOpacity, View, Text } from "react-native";
+import { Alert, ImageBackground } from "react-native";
 import LoginDetails from "../components/LoginDetails";
+
 export default function Index() {
   const [fullName, setFullName] = useState("");
   const [password, setPassword] = useState("");
   const [rememberMe, setRememberMe] = useState(false);
-
   const [actionType, setActionType] = useState("");
 
   const navigation = useNavigation();
-  
+
   useEffect(() => {
     navigation.setOptions({ headerShown: false });
   }, [navigation]);
 
   useEffect(() => {
+    if (!actionType) return; 
+
     switch (actionType) {
       case "Login":
         Alert.alert("Logueando");
+        // Esperar 2 segundos para pasar de pagina (unicamente estético)
+        setTimeout(() => {
+          router.push("/(home)/HomeScreen");
+        }, 2000);
         break;
       case "SignUp":
         Alert.alert("Registrando");
         break;
- case "ForgotPassword":
+      case "ForgotPassword":
         Alert.alert("Contraseña diferente");
         break;
       default:
         break;
     }
-    // Added the dependency array here
+  
+    setActionType("");
   }, [actionType]);
 
-  const handleLogin = () => {
-    console.log("Login button pressed");
-    console.log({ fullName, password, rememberMe });
-  };
-
   const handleForgotPassword = () => {
-    console.log("Forgot Password pressed");
- setActionType("ForgotPassword");
+    setActionType("ForgotPassword");
   };
 
   const handleSignUp = () => {
-    console.log("Sign Up pressed");
+    setActionType("SignUp");
   };
 
-  const handleActionType = (type: string) => setActionType(type);
+  const handleLogin = () => {
+    setActionType("Login");
+  };
 
   return (
-    
     <ImageBackground
       source={require("../assets/images/FondoMusica.png")}
       className="flex-1 w-screen h-screen justify-center items-center"
@@ -62,25 +64,10 @@ export default function Index() {
         setPassword={setPassword}
         rememberMe={rememberMe}
         setRememberMe={setRememberMe}
-        onLoginPress={() => handleActionType("Login")}
+        onLoginPress={handleLogin}
         onForgotPress={handleForgotPassword}
-        onSignUpPress={() => handleActionType("SignUp")}
+        onSignUpPress={handleSignUp}
       />
-      <View className="absolute bottom-12 right-6">
-      <TouchableOpacity 
-        onPress={() => { 
-          router.push("/(home)/HomeScreen")
-        }}
-        className="bg-[#b11f32] rounded-full p-4 w-full items-center mt-8"
-      ><Text className="text-white text-lg">Enviar</Text></TouchableOpacity>
-      </View>
-      
     </ImageBackground>
   );
-
-
-
-  
-  //Configurar el Layout
-  //Crear el Link-> SettingsScreen
 }
