@@ -16,9 +16,9 @@ const HomeScreen: React.FC = () => {
         </CustomText>
         
         <View>
-          <MenuItem label="Reproducción" iconName="play-circle" onPress={() => console.log('Explorar pressed')} />
-          <MenuItem label="Mis Playlists" iconName="music" onPress={() => console.log('Mis Playlists pressed')} />
-          <MenuItem label="Buscar" iconName="search" onPress={() => console.log('Buscar pressed')} />
+          <MenuItem label="Reproducción" iconName="play-circle" onPress={() => router.push('/(home)/Reproduccion')} />
+          <MenuItem label="Mis Playlists" iconName="music" onPress={() => router.push('/(home)/Biblioteca')} />
+          <MenuItem label="Buscar" iconName="search" onPress={() => router.push('/(home)/Search')} />
           <MenuItem label="Configuración" iconName="settings" onPress={() => router.push('/SettingsScreen')} />
         </View>
 
