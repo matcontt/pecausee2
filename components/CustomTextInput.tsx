@@ -18,9 +18,9 @@ const CustomTextInput = ({ placeholder, iconName, isPassword = false, value, onC
       <Feather name={iconName} size={20} color="#b11f32" />
       <TextInput
         placeholder={placeholder}
-        className="ml-3 flex-1 text-[#b11f32]"
+        className="ml-3 flex-1 text-[#000000]"
         secureTextEntry={isPassword && !showPassword}
-        placeholderTextColor="#b11f32"
+        placeholderTextColor="#000000"
         value={value}
         onChangeText={onChangeText}
       />

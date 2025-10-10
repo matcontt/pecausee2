@@ -9,7 +9,7 @@ const indexHome = () => {
                 onPress={() => { 
                   router.push("/SettingsScreen")
                 }}
-                className="bg-[#355D49] rounded-full p-4 w-full items-center mt-8"
+                className="bg-[#b11f32] rounded-full p-4 w-full items-center mt-8"
               ><Text className="text-white text-lg">Enviar</Text></TouchableOpacity>
         </View>
 
