@@ -52,7 +52,7 @@ export default function Index() {
   return (
     
     <ImageBackground
-      source={require("../assets/images/pexels-photo-3571551.jpeg")}
+      source={require("../assets/images/FondoMusica.png")}
       className="flex-1 w-screen h-screen justify-center items-center"
     >
       <LoginDetails
@@ -71,7 +71,7 @@ export default function Index() {
         onPress={() => { 
           router.push("/(home)/HomeScreen")
         }}
-        className="bg-[#355D49] rounded-full p-4 w-full items-center mt-8"
+        className="bg-[#b11f32] rounded-full p-4 w-full items-center mt-8"
       ><Text className="text-white text-lg">Enviar</Text></TouchableOpacity>
       </View>
       
