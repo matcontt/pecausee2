@@ -6,10 +6,13 @@ const HomeLayout = () => {
   return (
     <Stack>
         <Stack.Screen name="HomeScreen" options={{
-            title:"Home"
+            title:"Menú Principal"
         }}/>
         <Stack.Screen name="SettingsScreen"options={{
             title:"Configuraciones"
+        }}/>
+        <Stack.Screen name="Reproduccion" options={{
+            title:"Reproducción"
         }}/>
     </Stack>
   )

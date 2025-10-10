@@ -7,7 +7,7 @@ const indexHome = () => {
      <View className="absolute bottom-12 right-6">
               <TouchableOpacity 
                 onPress={() => { 
-                  router.push("/SettingsScreen")
+                  router.push("/Reproduccion")
                 }}
                 className="bg-[#b11f32] rounded-full p-4 w-full items-center mt-8"
               ><Text className="text-white text-lg">Enviar</Text></TouchableOpacity>
