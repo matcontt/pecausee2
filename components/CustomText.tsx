@@ -5,12 +5,13 @@ interface CustomTextProps {
     children: React.ReactNode;
     variant?: 'large' | 'medium' | 'small';
     className?: string;
+    numberOfLines?: number; // Add numberOfLines prop
 }
 
-const CustomText = ({ children, variant, className }: CustomTextProps) => {
+const CustomText = ({ children, variant, className, numberOfLines }: CustomTextProps) => {
 
     const getFontSize = () => {
-        if (!variant) return ''; // Si no hay variante, no se aplica un tamaño de fuente base
+        if (!variant) return '';
         switch (variant) {
             case 'large':
                 return 'text-4xl';
@@ -24,7 +25,10 @@ const CustomText = ({ children, variant, className }: CustomTextProps) => {
     }
 
   return (
-    <Text className={`${getFontSize()} ${className || ''}`.trim()}>
+    <Text 
+      className={`${getFontSize()} ${className || ''}`.trim()}
+      numberOfLines={numberOfLines} // Pass numberOfLines to Text component
+    >
       {children}
     </Text>
   )

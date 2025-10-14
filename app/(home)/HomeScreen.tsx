@@ -1,29 +1,67 @@
-import { View, ImageBackground } from 'react-native';
-import { router } from 'expo-router';
+import { View, ScrollView, FlatList, TouchableOpacity } from 'react-native';
 import React from 'react';
 import CustomText from '../../components/CustomText';
-import MenuItem from '../../components/MenuItem';
+
+// Placeholder data
+const recentlyPlayed = [
+  { id: '1', title: 'Album 1', artist: 'Artist 1' },
+  { id: '2', title: 'Album 2', artist: 'Artist 2' },
+  { id: '3', title: 'Album 3', artist: 'Artist 3' },
+  { id: '4', title: 'Album 4', artist: 'Artist 4' },
+  { id: '5', title: 'Album 5', artist: 'Artist 5' },
+];
+
+const playlists = [
+    { id: '1', title: 'Liked Songs' },
+    { id: '2', title: 'My Playlist #1' },
+    { id: '3', title: 'Rock Classics' },
+    { id: '4', title: 'Chill Mix' },
+    { id: '5', title: 'Indie Hits' },
+    { id: '6', title: 'Discover Weekly' },
+];
+
 
 const HomeScreen: React.FC = () => {
   return (
-    <ImageBackground
-      source={require("../../assets/images/FondoMusica.png")}
-      className="flex-1 justify-center items-center"
-    >
-      <View className="p-8 w-full max-w-md">
-        <CustomText variant="large" className="text-white font-bold text-center mb-12">
-          Menú Principal
-        </CustomText>
-        
-        <View>
-          <MenuItem label="Reproducción" iconName="play-circle" onPress={() => router.push('/(home)/Reproduccion')} />
-          <MenuItem label="Mis Playlists" iconName="music" onPress={() => router.push('/(home)/Biblioteca')} />
-          <MenuItem label="Buscar" iconName="search" onPress={() => router.push('/(home)/Search')} />
-          <MenuItem label="Configuración" iconName="settings" onPress={() => router.push('/SettingsScreen')} />
-        </View>
+    <View className="flex-1 bg-black">
+      <ScrollView style={{paddingTop: 50}} contentContainerStyle={{ paddingBottom: 100 }}>
+        <View className="p-4">
+          <CustomText variant="large" className="text-white font-bold mb-6">Good Morning</CustomText>
+          
+          {/* Recently Played */}
+          <View className="mb-8">
+            <CustomText variant="medium" className="text-white font-bold mb-4">Recently Played</CustomText>
+            <FlatList
+              data={recentlyPlayed}
+              horizontal
+              showsHorizontalScrollIndicator={false}
+              contentContainerStyle={{ gap: 16 }}
+              renderItem={({ item }) => (
+                <TouchableOpacity className="w-32">
+                  <View className="w-32 h-32 bg-gray-500 rounded-md mb-2"></View>
+                  <CustomText className="text-white font-bold" numberOfLines={1}>{item.title}</CustomText>
+                  <CustomText className="text-gray-400" numberOfLines={1}>{item.artist}</CustomText>
+                </TouchableOpacity>
+              )}
+              keyExtractor={item => item.id}
+            />
+          </View>
 
-      </View>
-    </ImageBackground>
+          {/* Your Playlists */}
+          <View>
+            <CustomText variant="medium" className="text-white font-bold mb-4">Your Playlists</CustomText>
+            <View style={{ gap: 12 }}>
+                {playlists.map(playlist => (
+                    <TouchableOpacity key={playlist.id} className="flex-row items-center bg-gray-800/50 p-2 rounded-md">
+                        <View className="w-16 h-16 bg-gray-700 rounded-md mr-4"></View>
+                        <CustomText className="text-white font-bold">{playlist.title}</CustomText>
+                    </TouchableOpacity>
+                ))}
+            </View>
+          </View>
+        </View>
+      </ScrollView>
+    </View>
   );
 };
 

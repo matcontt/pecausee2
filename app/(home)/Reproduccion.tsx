@@ -30,8 +30,8 @@ const ReproduccionScreen = () => {
         <Image source={{ uri: song.albumArt }} className="w-80 h-80 rounded-lg" />
       </View>
 
-      {/* Información de la canción */}
-      <View className="items-center mb-4">
+ {/* Información de la canción */}
+ <View className="items-center mb-4">
         <CustomText variant="large" className="text-white font-bold">{song.title}</CustomText>
         <CustomText variant="medium" className="text-gray-400">{song.artist}</CustomText>
       </View>
