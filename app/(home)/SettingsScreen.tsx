@@ -1,6 +1,7 @@
 import { View, TouchableOpacity, Switch } from 'react-native';
 import React, { useState } from 'react';
 import { useRouter } from 'expo-router';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import CustomText from '../../components/CustomText';
 
 // Definimos la interfaz para las props del componente SettingsRow
@@ -12,6 +13,16 @@ interface SettingsRowProps {
 const SettingsScreen = () => {
   const router = useRouter();
   const [notifications, setNotifications] = useState(true);
+
+  // Función para cerrar sesión
+  const handleLogout = async () => {
+    try {
+      await AsyncStorage.removeItem('userToken'); // Limpia el token
+      router.replace('/'); // Navega a la pantalla raíz (index.tsx)
+    } catch (error) {
+      console.error('Error al cerrar sesión:', error);
+    }
+  };
 
   // Aplicamos la interfaz de props al componente
   const SettingsRow = ({ label, children }: SettingsRowProps) => (
@@ -56,9 +67,9 @@ const SettingsScreen = () => {
           />
         </SettingsRow>
       </View>
-      
+
       {/* Sección de Acerca de */}
-      <View>
+      <View className="mb-8">
         <CustomText variant="small" className="text-gray-400 mb-2">ACERCA DE</CustomText>
         <SettingsRow label="Términos de Servicio">
           <CustomText variant="medium" className="text-gray-400">›</CustomText>
@@ -66,11 +77,20 @@ const SettingsScreen = () => {
         <SettingsRow label="Política de Privacidad">
           <CustomText variant="medium" className="text-gray-400">›</CustomText>
         </SettingsRow>
-         <SettingsRow label="Versión">
+        <SettingsRow label="Versión">
           <CustomText variant="medium" className="text-gray-400">1.0.0</CustomText>
         </SettingsRow>
       </View>
 
+      {/* Sección para Cerrar Sesión */}
+      <View>
+        <CustomText variant="small" className="text-gray-400 mb-2">SESION</CustomText>
+        <SettingsRow label="Cerrar Sesión">
+          <TouchableOpacity onPress={handleLogout}>
+            <CustomText variant="medium" className="text-red-500">›</CustomText>
+          </TouchableOpacity>
+        </SettingsRow>
+      </View>
     </View>
   );
 };
