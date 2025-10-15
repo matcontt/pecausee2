@@ -31,7 +31,7 @@ const LoginDetails = ({
 }: LoginDetailsProps) => {
   return (
     <View className="bg-[#b8b3b3] absolute bottom-0 h-[70%] w-full rounded-tl-[60px] p-8 items-center">
-        <CustomText variant='large' className='text-black font-bold'>Welcom Back</CustomText>
+        <CustomText variant='large' className='text-black font-bold'>Welcome Back</CustomText>
         <CustomText variant='small' className='text-[#666666]'>Login to your account</CustomText>
         <View className="w-full mt-6">
             <CustomTextInput placeholder='Full Name' iconName='user' value={fullName} onChangeText={setFullName}/>

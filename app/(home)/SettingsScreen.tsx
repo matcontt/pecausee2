@@ -1,3 +1,4 @@
+// /app/(home)/SettingsScreen.tsx
 import { View, TouchableOpacity, Switch } from 'react-native';
 import React, { useState } from 'react';
 import { useRouter } from 'expo-router';
@@ -7,7 +8,8 @@ import CustomText from '../../components/CustomText';
 // Definimos la interfaz para las props del componente SettingsRow
 interface SettingsRowProps {
   label: string;
-  children: React.ReactNode;
+  onPress?: () => void; // Opcional, solo para filas navegables
+  children?: React.ReactNode; // Para Switch o texto no clicable
 }
 
 const SettingsScreen = () => {
@@ -18,18 +20,28 @@ const SettingsScreen = () => {
   const handleLogout = async () => {
     try {
       await AsyncStorage.removeItem('userToken'); // Limpia el token
-      router.replace('/'); // Navega a la pantalla raíz (index.tsx)
+      router.replace({ pathname: '/', params: { from: 'logout' } }); // Navega a login
     } catch (error) {
       console.error('Error al cerrar sesión:', error);
     }
   };
 
-  // Aplicamos la interfaz de props al componente
-  const SettingsRow = ({ label, children }: SettingsRowProps) => (
-    <View className="flex-row justify-between items-center py-4 border-b border-gray-800">
+  // Funciones para navegación a rutas inexistentes (activará 404)
+  const handleEditProfile = () => router.push('/(home)/edit-profile');
+  const handleChangePassword = () => router.push('/(home)/change-password');
+  const handleTerms = () => router.push('/(home)/terms');
+  const handlePrivacy = () => router.push('/(home)/privacy');
+
+  // Componente SettingsRow como TouchableOpacity completo
+  const SettingsRow = ({ label, onPress, children }: SettingsRowProps) => (
+    <TouchableOpacity
+      onPress={onPress}
+      className="flex-row justify-between items-center py-4 border-b border-gray-800"
+      activeOpacity={0.7} // Feedback visual al tocar
+    >
       <CustomText variant="medium" className="text-white">{label}</CustomText>
-      {children}
-    </View>
+      {children || <CustomText variant="medium" className="text-gray-400">›</CustomText>}
+    </TouchableOpacity>
   );
 
   return (
@@ -47,12 +59,8 @@ const SettingsScreen = () => {
       {/* Sección de Cuenta */}
       <View className="mb-8">
         <CustomText variant="small" className="text-gray-400 mb-2">CUENTA</CustomText>
-        <SettingsRow label="Editar Perfil">
-          <CustomText variant="medium" className="text-gray-400">›</CustomText>
-        </SettingsRow>
-        <SettingsRow label="Cambiar Contraseña">
-          <CustomText variant="medium" className="text-gray-400">›</CustomText>
-        </SettingsRow>
+        <SettingsRow label="Editar Perfil" onPress={handleEditProfile} />
+        <SettingsRow label="Cambiar Contraseña" onPress={handleChangePassword} />
       </View>
 
       {/* Sección de Notificaciones */}
@@ -71,12 +79,8 @@ const SettingsScreen = () => {
       {/* Sección de Acerca de */}
       <View className="mb-8">
         <CustomText variant="small" className="text-gray-400 mb-2">ACERCA DE</CustomText>
-        <SettingsRow label="Términos de Servicio">
-          <CustomText variant="medium" className="text-gray-400">›</CustomText>
-        </SettingsRow>
-        <SettingsRow label="Política de Privacidad">
-          <CustomText variant="medium" className="text-gray-400">›</CustomText>
-        </SettingsRow>
+        <SettingsRow label="Términos de Servicio" onPress={handleTerms} />
+        <SettingsRow label="Política de Privacidad" onPress={handlePrivacy} />
         <SettingsRow label="Versión">
           <CustomText variant="medium" className="text-gray-400">1.0.0</CustomText>
         </SettingsRow>
@@ -85,10 +89,8 @@ const SettingsScreen = () => {
       {/* Sección para Cerrar Sesión */}
       <View>
         <CustomText variant="small" className="text-gray-400 mb-2">SESION</CustomText>
-        <SettingsRow label="Cerrar Sesión">
-          <TouchableOpacity onPress={handleLogout}>
-            <CustomText variant="medium" className="text-red-500">›</CustomText>
-          </TouchableOpacity>
+        <SettingsRow label="Cerrar Sesión" onPress={handleLogout}>
+          <CustomText variant="medium" className="text-red-500">›</CustomText>
         </SettingsRow>
       </View>
     </View>

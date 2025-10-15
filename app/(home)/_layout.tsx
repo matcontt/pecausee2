@@ -1,7 +1,7 @@
 import { Tabs } from 'expo-router';
 import { Feather } from '@expo/vector-icons';
 
-const HomeLayout = () => {
+export default function HomeLayout() {
   return (
     <Tabs
       screenOptions={{
@@ -54,6 +54,4 @@ const HomeLayout = () => {
       />
     </Tabs>
   );
-};
-
-export default HomeLayout;
+}

@@ -1,7 +1,8 @@
 import "@/global.css";
-import { router, useNavigation } from "expo-router";
+import { router, useNavigation, useLocalSearchParams } from "expo-router";
 import { useEffect, useState } from "react";
 import { Alert, ImageBackground } from "react-native";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import LoginDetails from "../components/LoginDetails";
 import RegisterForm from "../components/RegisterForm";
 
@@ -14,10 +15,23 @@ export default function Index() {
   const [isRegistering, setIsRegistering] = useState(false);
 
   const navigation = useNavigation();
+  const params = useLocalSearchParams();
 
   useEffect(() => {
     navigation.setOptions({ headerShown: false });
-  }, [navigation]);
+
+    // Verificar si venimos de un logout para forzar la pantalla de login
+    const checkAuth = async () => {
+      const token = await AsyncStorage.getItem("userToken");
+      if (!token) {
+        setIsRegistering(false); // Asegura que mostramos LoginDetails
+      } else if (params.from === "logout") {
+        await AsyncStorage.removeItem("userToken"); // Limpia token si viene de logout
+        setIsRegistering(false); // Forzar login tras logout
+      }
+    };
+    checkAuth();
+  }, [navigation, params]);
 
   useEffect(() => {
     if (!actionType) return;
@@ -25,8 +39,10 @@ export default function Index() {
     switch (actionType) {
       case "Login":
         Alert.alert("Logueando");
-        setTimeout(() => {
-          router.push("/(home)/HomeScreen");
+        setTimeout(async () => {
+          // Simular guardado de token (reemplaza con tu lógica de autenticación real)
+          await AsyncStorage.setItem("userToken", "dummy-token");
+          router.replace("/(home)/HomeScreen"); // Navega a HomeScreen en (home)
         }, 2000);
         break;
       case "Register":
@@ -34,11 +50,9 @@ export default function Index() {
           Alert.alert("Error", "Las contraseñas no coinciden");
         } else {
           Alert.alert("Registrando");
-          // Aquí puedes agregar tu lógica de registro
-          // Por ahora, solo volvemos al login
-            setTimeout(() => {
-                setIsRegistering(false);
-            }, 2000);
+          setTimeout(() => {
+            setIsRegistering(false);
+          }, 2000);
         }
         break;
       case "ForgotPassword":
@@ -58,7 +72,7 @@ export default function Index() {
   const handleShowRegister = () => {
     setIsRegistering(true);
   };
-  
+
   const handleBackToLogin = () => {
     setIsRegistering(false);
   };
